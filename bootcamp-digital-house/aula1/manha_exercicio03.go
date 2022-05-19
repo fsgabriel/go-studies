@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main(){
+func main() {
 	var nome, sobrenome string
 	var idade int
 	sobrenome = "6"
