@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"debug/plan9obj"
+	"fmt"
+)
 
 func main() {
 	var employees = map[string]int{"Benjamin": 20, "Manuel": 26, "Brenda": 19, "Dario": 44, "Pedro": 30}
