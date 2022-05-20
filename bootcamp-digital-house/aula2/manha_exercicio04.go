@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 const (
 	minimum = "minimum"
@@ -11,14 +14,14 @@ const (
 func main() {
 
 	minhaFunc, _ := operation(minimum)
-	// averageFunc, err := operation(average)
+	averageFunc, _ := operation(average)
 	maxFunc, _ := operation(maximum)
 
 	minValue := minhaFunc(2, 3, 3, 4, 10, 2, 4, 5)
-	// averageValue := averageFunc(2, 3, 3, 4, 1, 2, 4, 5)
+	averageValue := averageFunc(2, 3, 3, 4, 1, 2, 4, 5)
 	maxValue := maxFunc(2, 3, 3, 4, 1, 2, 4, 5)
 
-	fmt.Println(minValue, maxValue)
+	fmt.Println(minValue, maxValue, averageValue)
 }
 
 func operation(operacao string) (func(n ...int) int, error) {
@@ -27,9 +30,11 @@ func operation(operacao string) (func(n ...int) int, error) {
 		return minimumFn, nil
 	case maximum:
 		return maximumFn, nil
+	case average:
+		return averageFunc, nil
 	}
 
-	return func(n ...int) int { return 0 }, nil
+	return func(n ...int) int { return 0 }, errors.New("operacao invalida")
 }
 
 func minimumFn(n ...int) int {
@@ -54,4 +59,14 @@ func maximumFn(n ...int) int {
 	}
 
 	return aux
+}
+
+func averageFunc(n ...int) int{
+	var aux int = 0
+
+	for _, value := range n {
+		aux += value
+	}
+
+	return aux / len(n)
 }
