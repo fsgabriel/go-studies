@@ -34,7 +34,7 @@ func operation(operacao string) (func(n ...int) int, error) {
 		return averageFunc, nil
 	}
 
-	return func(n ...int) int { return 0 }, errors.New("operacao invalida")
+	return nil, errors.New("operacao invalida")
 }
 
 func minimumFn(n ...int) int {
