@@ -31,12 +31,18 @@ func (p *produtos) CalcularCusto() {
 	}
 }
 
-func (l *loja) Total(){
+func (l *loja) Total() float64{
 	var total float64
 
-	for _, produto := range l {
-		total += l.preco + l.adicionl
+	for _, produto := range l.listProdutos {
+		total += produto.preco + produto.adicionl
 	}
+
+	return total
+}
+
+func (l *loja) Adicionar(p produtos) {
+	l.listProdutos = append(l.listProdutos, p)
 }
 
 func NovoProduto(tipo, nome string, preco float64) *produtos{
@@ -54,10 +60,14 @@ func NovaLoja(listProdutos ...produtos) *loja{
 func main(){
 	listaProdutos := []produtos{}
 
-	listaProdutos = append(listaProdutos, *NovoProduto("Tec", "Celular", 1000.00))
-	listaProdutos = append(listaProdutos, *NovoProduto("Casa", "Sofa", 5000.00))
+	listaProdutos = append(listaProdutos, *NovoProduto("Pequeno", "Celular", 1000.00))
+	listaProdutos = append(listaProdutos, *NovoProduto("Grande", "Sofa", 5000.00))
 
 	loja2 := *NovaLoja(listaProdutos...)
 
-	fmt.Println(loja2)
+	fmt.Printf("Valor total produtos na Loja: R$%.2f\n", loja2.Total())
+
+	loja2.Adicionar(*NovoProduto("Medio", "TV", 2000.00))
+
+	fmt.Printf("Valor total produtos na Loja: R$%.2f\n", loja2.Total())
 }
