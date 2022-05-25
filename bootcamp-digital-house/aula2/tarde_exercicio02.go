@@ -2,36 +2,40 @@ package main
 
 import "fmt"
 
+// * para criar variável do tipo pointeiro
+// * para visualizar o valor da posição da memória
+// & para atribuir um valor ao ponteiro
+
 type loja struct {
 	listProdutos []produtos
 }
 
-type produtos struct{
-	tipo string
-	nome string
-	preco float64
+type produtos struct {
+	tipo     string
+	nome     string
+	preco    float64
 	adicionl float64
 }
 
-type Produtos interface{
+type Produtos interface {
 	CalcularCusto()
 }
 
-type Ecommerce interface{
+type Ecommerce interface {
 	Total()
 	Adicionar()
 }
 
 func (p *produtos) CalcularCusto() {
-	if p.tipo == "Grande"{
+	if p.tipo == "Grande" {
 		p.adicionl = (p.preco * 0.06) + 2500
 	}
-	if p.tipo == "Medio"{
+	if p.tipo == "Medio" {
 		p.adicionl = (p.preco * 0.03)
 	}
 }
 
-func (l *loja) Total() float64{
+func (l *loja) Total() float64 {
 	var total float64
 
 	for _, produto := range l.listProdutos {
@@ -45,23 +49,22 @@ func (l *loja) Adicionar(p produtos) {
 	l.listProdutos = append(l.listProdutos, p)
 }
 
-func NovoProduto(tipo, nome string, preco float64) *produtos{
+func NovoProduto(tipo, nome string, preco float64) *produtos {
 	return &produtos{
-		tipo: tipo, 
-		nome: nome, 
+		tipo:  tipo,
+		nome:  nome,
 		preco: preco,
 	}
 }
 
-func NovaLoja(listProdutos ...produtos) *loja{
+func NovaLoja(listProdutos ...produtos) *loja {
 	return &loja{listProdutos: listProdutos}
 }
 
-func main(){
+func main() {
 	listaProdutos := []produtos{}
 
-	listaProdutos = append(listaProdutos, *NovoProduto("Pequeno", "Celular", 1000.00))
-	listaProdutos = append(listaProdutos, *NovoProduto("Grande", "Sofa", 5000.00))
+	listaProdutos = append(listaProdutos, *NovoProduto("Pequeno", "Celular", 1000.00), *NovoProduto("Grande", "Sofa", 5000.00))
 
 	loja2 := *NovaLoja(listaProdutos...)
 

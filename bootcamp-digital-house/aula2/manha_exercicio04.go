@@ -61,7 +61,7 @@ func maximumFn(n ...int) int {
 	return aux
 }
 
-func averageFunc(n ...int) int{
+func averageFunc(n ...int) int {
 	var aux int = 0
 
 	for _, value := range n {

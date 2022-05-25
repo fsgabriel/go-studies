@@ -14,7 +14,6 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 )
 
 type Person struct{
@@ -63,6 +62,4 @@ func main(){
 	p.ChangeEmail("maria@gmail.com")
 
 	fmt.Println(p)
-
-	http.StatusAccepted
 }
