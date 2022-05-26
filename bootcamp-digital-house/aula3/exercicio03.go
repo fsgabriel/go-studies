@@ -16,41 +16,41 @@ import (
 	"fmt"
 )
 
-type Person struct{
-	Nome string
+type Person struct {
+	Nome      string
 	Sobrenome string
-	Idade int
-	Email string
-	Senha string
+	Idade     int
+	Email     string
+	Senha     string
 }
 
-func (p *Person) ChangeName(s string){
+func (p *Person) ChangeName(s string) {
 	p.Nome = s
 }
 
-func (p *Person) ChangeSobrenome(s string){
-	p.Sobrenome = s 
+func (p *Person) ChangeSobrenome(s string) {
+	p.Sobrenome = s
 }
 
-func (p *Person) ChangeIdade(i int){
+func (p *Person) ChangeIdade(i int) {
 	p.Idade = i
 }
 
-func (p *Person) ChangeSenha(s string){
+func (p *Person) ChangeSenha(s string) {
 	p.Senha = s
 }
 
-func (p *Person) ChangeEmail(s string){
+func (p *Person) ChangeEmail(s string) {
 	p.Email = s
 }
 
-func main(){
+func main() {
 	p := Person{
-		Nome: "Gabriel",
+		Nome:      "Gabriel",
 		Sobrenome: "Silva",
-		Idade: 22,
-		Email: "gabriel@gmail.com",
-		Senha: "22222",
+		Idade:     22,
+		Email:     "gabriel@gmail.com",
+		Senha:     "22222",
 	}
 
 	fmt.Println(p)
@@ -62,4 +62,5 @@ func main(){
 	p.ChangeEmail("maria@gmail.com")
 
 	fmt.Println(p)
+
 }
