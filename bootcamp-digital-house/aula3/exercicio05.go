@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"sync"
 )
 
 // Uma empresa nacional é responsável pela venda de produtos, serviços e manutenção.
@@ -46,18 +46,20 @@ type Manutencao struct {
 	Preco float64
 }
 
-func PrecoTotalProduto(p []Produto) float64 {
+func PrecoTotalProduto(p []Produto, ch chan string, wg *sync.WaitGroup) float64 {
+	defer wg.Done()
 	var total float64
 	for _, produto := range p {
 		total += (produto.Preco * float64(produto.Quantidade))
 	}
 
-	fmt.Printf("Soma total preco dos produtos: %.2fR$\n", total)
+	ch <- fmt.Sprintf("Soma total preco dos produtos: %.2fR$\n", total)
 
 	return total
 }
 
-func PrecoTotalServico(a []Servicos) float64 {
+func PrecoTotalServico(a []Servicos, ch chan string, wg *sync.WaitGroup) float64 {
+	defer wg.Done()
 	var total float64
 	for _, servico := range a {
 		if servico.MinutosTrabalhados <= 30 {
@@ -68,23 +70,30 @@ func PrecoTotalServico(a []Servicos) float64 {
 		}
 	}
 
-	fmt.Printf("Preco total de servicos por tempo de trabalho: %.2fR$\n", total)
+	ch <- fmt.Sprintf("Preco total de servicos por tempo de trabalho: %.2fR$\n", total)
 
 	return total
 }
 
-func PrecoTotalManutencao(m []Manutencao) float64 {
+func PrecoTotalManutencao(m []Manutencao, ch chan string, wg *sync.WaitGroup) float64 {
+	defer wg.Done()
 	var total float64
 	for _, manutencao := range m {
 		total += manutencao.Preco
 	}
 
-	fmt.Printf("Preco total das manutencoes: %.2f\n", total)
+	ch <- fmt.Sprintf("Preco total das manutencoes: %.2f\n", total)
 
 	return total
 }
 
 func main() {
+	ch := make(chan string, 3)
+
+	var wg sync.WaitGroup
+
+	wg.Add(3)
+
 	arrProdutos := []Produto{
 		{
 			Nome:       "Copos",
@@ -133,13 +142,16 @@ func main() {
 		},
 	}
 
-	// PrecoTotalManutencao(arrManutencao)
-	// PrecoTotalProduto(arrProdutos)
-	// PrecoTotalServico(arrServicos)
+	go PrecoTotalManutencao(arrManutencao, ch, &wg)
+	go PrecoTotalProduto(arrProdutos, ch, &wg)
+	go PrecoTotalServico(arrServicos, ch, &wg)
 
-	go PrecoTotalManutencao(arrManutencao)
-	go PrecoTotalProduto(arrProdutos)
-	go PrecoTotalServico(arrServicos)
+	wg.Wait()
 
-	time.Sleep(1 * time.Second)
+	close(ch)
+
+	for el := range ch {
+		fmt.Println(el)
+	}
+
 }
