@@ -1,0 +1,34 @@
+[
+    {
+        "id": 2,
+        "nome": "TV",
+        "cor": "Prata",
+        "preco": 1500,
+        "estoque": true,
+        "codigo": "dasdas89d78a9s"
+    },
+    {
+        "id": 3,
+        "nome": "Sofa",
+        "cor": "Marrom",
+        "preco": 1200,
+        "estoque": true,
+        "codigo": "pidsf98s09kj"
+    },
+    {
+        "id": 4,
+        "nome": "Teclado",
+        "cor": "Prata",
+        "preco": 200,
+        "estoque": false,
+        "codigo": "odjoaksjda098"
+    },
+    {
+        "id": 5,
+        "nome": "Mouse",
+        "cor": "Branco",
+        "preco": 20,
+        "estoque": false,
+        "codigo": "mlkamds0i9"
+    }
+]
