@@ -12,73 +12,73 @@
 //         2. Dentro dele escrevi um JSON que permite ter uma matriz de produtos, usuários ou
 //         transações com todas as suas variantes.
 
-package main
+// package main
 
-import (
-	"encoding/json"
-	"fmt"
-	"os"
-)
+// import (
+// 	"encoding/json"
+// 	"fmt"
+// 	"os"
+// )
 
-var id int64 = 1
+// var id int64 = 1
 
-type Products struct {
-	Id      int64   `json:"id"`
-	Nome    string  `json:"nome"`
-	Cor     string  `json:"cor"`
-	Preco   float64 `json:"preco"`
-	Estoque bool    `json:"estoque"`
-	Codigo  string  `json:"codigo"`
-}
+// type Products struct {
+// 	Id      int64   `json:"id"`
+// 	Nome    string  `json:"nome"`
+// 	Cor     string  `json:"cor"`
+// 	Preco   float64 `json:"preco"`
+// 	Estoque bool    `json:"estoque"`
+// 	Codigo  string  `json:"codigo"`
+// }
 
-func createID() int64 {
-	id += 1
-	return id
-}
+// func createID() int64 {
+// 	id += 1
+// 	return id
+// }
 
-func main2() {
-	p := []Products{
-		{
-			Id:      createID(),
-			Nome:    "TV",
-			Cor:     "Prata",
-			Preco:   1500,
-			Estoque: true,
-			Codigo:  "dasdas89d78a9s",
-		},
-		{
-			Id:      createID(),
-			Nome:    "Sofa",
-			Cor:     "Marrom",
-			Preco:   1200,
-			Estoque: true,
-			Codigo:  "pidsf98s09kj",
-		},
-		{
-			Id:      createID(),
-			Nome:    "Teclado",
-			Cor:     "Prata",
-			Preco:   200,
-			Estoque: false,
-			Codigo:  "odjoaksjda098",
-		},
-		{
-			Id:      createID(),
-			Nome:    "Mouse",
-			Cor:     "Branco",
-			Preco:   20,
-			Estoque: false,
-			Codigo:  "mlkamds0i9",
-		},
-	}
+// func main2() {
+// 	p := []Products{
+// 		{
+// 			Id:      createID(),
+// 			Nome:    "TV",
+// 			Cor:     "Prata",
+// 			Preco:   1500,
+// 			Estoque: true,
+// 			Codigo:  "dasdas89d78a9s",
+// 		},
+// 		{
+// 			Id:      createID(),
+// 			Nome:    "Sofa",
+// 			Cor:     "Marrom",
+// 			Preco:   1200,
+// 			Estoque: true,
+// 			Codigo:  "pidsf98s09kj",
+// 		},
+// 		{
+// 			Id:      createID(),
+// 			Nome:    "Teclado",
+// 			Cor:     "Prata",
+// 			Preco:   200,
+// 			Estoque: false,
+// 			Codigo:  "odjoaksjda098",
+// 		},
+// 		{
+// 			Id:      createID(),
+// 			Nome:    "Mouse",
+// 			Cor:     "Branco",
+// 			Preco:   20,
+// 			Estoque: false,
+// 			Codigo:  "mlkamds0i9",
+// 		},
+// 	}
 
-	data, err := json.Marshal(p)
+// 	data, err := json.Marshal(p)
 
-	if err != nil {
-		panic(err)
-	}
+// 	if err != nil {
+// 		panic(err)
+// 	}
 
-	fmt.Println(string(data))
+// 	fmt.Println(string(data))
 
-	os.WriteFile("./products.json", data, 0777)
-}
+// 	os.WriteFile("./products.json", data, 0777)
+// }
