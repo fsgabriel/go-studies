@@ -1,4 +1,4 @@
-module githubcom/sgabriel99/go-studies
+module githubcom/sfgabriel/go-studies
 
 go 1.18
 
